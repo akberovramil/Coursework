@@ -1,4 +1,6 @@
 import java.util.Arrays;
+import java.util.Objects;
+
 public class Employee {
     private String worker;
     private double salary;
@@ -39,6 +41,20 @@ public class Employee {
     public String toString() {
         return "ID " + id + ", работник - " + worker + ", зарплата - " + salary + " руб." + ", отдел - " + departments;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Employee employee = (Employee) o;
+        return Double.compare(employee.salary, salary) == 0 && id == employee.id && Objects.equals(worker, employee.worker) && Objects.equals(departments, employee.departments);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(worker, salary, id, departments);
+    }
+
 }
 
 
